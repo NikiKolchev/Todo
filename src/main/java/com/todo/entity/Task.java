@@ -4,7 +4,7 @@ package com.todo.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tasks")
@@ -22,16 +22,16 @@ public class Task {
     private String todo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
     public Task() {
     }
 
-    public Task(Long author, boolean status, String todo, LocalDateTime dateTime) {
+    public Task(Long author, boolean status, String todo, LocalDate date) {
         this.author = author;
         this.status = status;
         this.todo = todo;
-        this.dateTime = dateTime;
+        this.date = date;
     }
 
     public Long getId() {
@@ -66,11 +66,11 @@ public class Task {
         this.todo = todo;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -1,11 +1,13 @@
 package com.todo.model;
 
 
+import org.joda.time.LocalDate;
+
 import java.time.LocalDateTime;
 
-public class CallendarDay {
+public class CalendarDay {
 
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
 
     private boolean busy;
 
@@ -13,21 +15,21 @@ public class CallendarDay {
 
     private boolean proper;
 
-    public CallendarDay() {
+    public CalendarDay() {
     }
 
-    public CallendarDay(LocalDateTime dateTime, boolean busy, int completed, boolean proper) {
+    public CalendarDay(LocalDate dateTime, boolean busy, int completed, boolean proper) {
         this.dateTime = dateTime;
         this.busy = busy;
         this.completed = completed;
         this.proper = proper;
     }
 
-    public LocalDateTime getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
 
