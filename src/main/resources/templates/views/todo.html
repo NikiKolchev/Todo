@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../static/customCSS/main.css" th:href="@{/customCSS/main.css}"/>
+    <title>Home</title>
+</head>
+<body>
+    <div th:replace="/fragments/fragments::header">
+    </div>
+
+    <!-- list of todos -->
+    <div>
+        <nav>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="#" th:href="@{/tasks/} + ${prevDate}">Previous day</a>
+                </li>
+                <li>Tasks for <a href="#" th:href="@{/calendar/} + ${nowMonth}" th:text="${nowDate}">yyyy-MM-dd</a></li>
+                <li class="next">
+                    <a href="#" th:href="@{/tasks/} + ${nextDate}">Next day</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- progress bar -->
+        <div class="progress">
+            <div
+                    class="progress-bar progress-bar-striped"
+                    th:classappend="${progress} == 100 ? 'progress-bar-success' : 'active'"
+                    role="progressbar"
+                    aria-valuenow="100"
+                    th:attr="aria-valuenow=${progress}"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width:100%"
+                    th:style="'width:' + ${progress} + '%'"
+            >
+                Completed: <span th:text="${progress}">100</span>%
+            </div>
+        </div>
+
+        <!-- new task form -->
+        <form method="POST" action="#" th:action="@{/tasks/} + ${nowDate}" th:object="${newTask}">
+
+            <div class="input-group" th:classappend="${#fields.hasErrors('todo')} ? 'has-error'">
+                <input
+                        type="text"
+                        class="form-control"
+                        id="newTask"
+                        placeholder="Your new task"
+                        th:placeholder="${#fields.hasErrors('todo')} ? ${#fields.errors('todo')} : 'Your new task'"
+                        th:field="*{todo}"
+                        autofocus="autofocus"
+                />
+                <span class="input-group-btn">
+                            <input type="submit" class="btn btn-success" value="Add task"/>
+                        </span>
+                <input type="hidden" id="newTaskDate" th:field="*{date}" value="2016-03-24" th:value="${nowDate}"/>
+                <input type="hidden" id="newTaskStatus" th:field="*{status}" value="2016-03-24" th:value="false"/>
+            </div>
+
+        </form>
+
+        <!-- list of tasks -->
+        <ul class="list-group">
+            <li class="list-group-item" th:each="task : ${tasks}">
+                <a
+                        class="glyphicon"
+                        th:classappend="${task.status} ? 'glyphicon-check' : 'glyphicon-unchecked'"
+                        href="#"
+                        th:href="@{/tasks/} + ${nowDate} + '/set?id=' + ${task.id} + '&amp;status=' + !${task.status}"
+                ></a>
+
+                <span class="" th:text="${task.todo}">task to be done</span>
+
+                <div class="pull-right">
+
+                    <a
+                            class="glyphicon glyphicon-arrow-right text-primary"
+                            href="#"
+                            th:href="@{/tasks/} + ${nowDate} + '/push?id=' + ${task.id}"
+                    >
+                    </a>
+
+                    <a class="glyphicon glyphicon-remove text-danger" href="#"
+                            th:href="@{/tasks/} + ${nowDate} + '/remove?id=' + ${task.id}">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div th:replace="/fragments/fragments::footer"></div>
+    <script src="../../static/jquery/jquery.min.js"></script>
+</body>
+</html>

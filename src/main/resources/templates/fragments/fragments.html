@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../static/customCSS/main.css" th:href="@{/customCSS/main.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-inverse" th:fragment="header">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{/}">TODO</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#">Todo</a></li>
+                <li><a href="#">Calendar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <footer class="footer" th:fragment="footer">
+        Copyright by Kolchev &#169;
+    </footer>
+</body>
+</html>

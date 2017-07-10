@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../static/customCSS/main.css" th:href="@{/customCSS/main.css}"/>
+    <title>TODO</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" th:fragment="header">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" th:href="@{/}">TODO</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">Todo</a></li>
+            <li><a href="#">Calendar</a></li>
+        </ul>
+    </div>
+
+    <form th:if="${#authorization.expression('isAuthentiacted()')}" class="navbar-form navbar-right" action="#" th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-default">Sign In</button>
+    </form>
+
+    <form th:if="!${#authorization.expression('isAuthenticated()')}" class="navbar-form navbar-right" action="#" th:action="@{/login}" method="get">
+        <button type="submit" class="btn btn-danger">Sign Up</button>
+    </form>
+
+    <form th:if="!${#authorization.expression('isAuthenticated()')}" class="navbar-form navbar-right" action="#" th:action="@{/register}" method="get">
+        <button type="submit" class="btn btn-success">Sign Up</button>
+    </form>
+</nav>
+
+
+    <div th:replace="/fragments/fragments::footer"></div>
+    <script src="../../static/jquery/jquery.min.js"></script>
+</body>
+</html>
